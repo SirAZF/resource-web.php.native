@@ -5,13 +5,14 @@ class Connection
 
     private $servername = "localhost:3306";
     private $username = "root";
-    private $password = "rootr00t";
-    private $db = "superprof_web";
+    private $password = "";
+    private $db = "rm_rumah_kenyang";
 
     protected $conn;
 
     protected function connect()
     {
+        // echo isset($this->conn) ? "EXIST" : "NOT EXIST" ;
         $this->conn = new mysqli(
             $this->servername,
             $this->username,
@@ -19,6 +20,8 @@ class Connection
             $this->db
         );
 
+        // echo isset($this->conn) ? "EXIST" : "NOT EXIST";
+        // die();
         if ($this->conn->connect_error) {
             die("connection failed" . $this->conn->connect_error);
         }
@@ -81,7 +84,29 @@ class RoleConn extends Connection
     public function getRole()
     {
         $sql = "SELECT
+
                 * FROM bagian";
         return $this->perform($sql);
+    }
+
+    public function deleteRoleWithId($id)
+    {
+        $sql = "DELETE 
+                    FROM bagian
+                    WHERE id=" . $id;
+        $this->perform($sql);
+        return true;
+    }
+
+    public function createRole($data)
+    {
+        $sql = "INSERT INTO bagian
+                (nama)
+                VALUES
+                (\"{$data["nama"]}\")
+                ";
+        // echo $sql;
+        // die();
+        $this->perform($sql);
     }
 }
