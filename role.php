@@ -40,7 +40,7 @@ include("head.php");
                 <td><?= $no ?></td>
                 <td><?= $row["nama"] ?></td>
                 <td>
-                    <button>Edit</button>
+                    <a href="/role-edit.php?id=<?= $row["id"] ?>"><button>Edit</button></a>
                     <a href="/role-hapus.php?id=<?= $row["id"] ?>">Delete</a>
                 </td>
             </tr>
