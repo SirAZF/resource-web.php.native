@@ -167,14 +167,63 @@ class MenuConn extends Connection
                 VALUES
                 (\"{$data["nama"]}\", {$data["harga"]})
                 ";
-        // echo $sql;
-        // die();
         $this->perform($sql);
     }
 
     public function getOneMenu($id){
 
         $sql = "SELECT * FROM menu where  id=". $id;
+        $result = $this->perform($sql);
+        
+        $row = $result->fetch_assoc();
+        
+        return $row;
+    }
+}
+
+
+class PelangganConn extends Connection
+{
+
+    public function getPelanggan()
+    {
+        $sql = "SELECT
+
+                * FROM pelanggan";
+        return $this->perform($sql);
+    }
+
+    public function updatePelangganbyID($id, $data)
+    {
+        $sql = "UPDATE pelanggan
+                SET nama = \"{$data["nama"]}\"
+                where id=" . $id;
+        $this->perform($sql);
+        return true;
+    }
+
+    public function deletePelangganWithId($id)
+    {
+        $sql = "DELETE 
+                    FROM pelanggan
+                    WHERE id=" . $id;
+        $this->perform($sql);
+        return true;
+    }
+
+    public function createPelanggan($data)
+    {
+        $sql = "INSERT INTO pelanggan
+                (nama)
+                VALUES
+                (\"{$data["nama"]}\")
+                ";
+        $this->perform($sql);
+    }
+
+    public function getOnePelanggan($id){
+
+        $sql = "SELECT nama FROM pelanggan where  id=". $id;
         $result = $this->perform($sql);
         
         $row = $result->fetch_assoc();
