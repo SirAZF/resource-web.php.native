@@ -129,3 +129,56 @@ class RoleConn extends Connection
         return $row;
     }
 }
+
+
+class MenuConn extends Connection
+{
+
+    public function getMenu()
+    {
+        $sql = "SELECT
+
+                * FROM menu";
+        return $this->perform($sql);
+    }
+
+    public function updateMenubyID($id, $data)
+    {
+        $sql = "UPDATE menu
+                SET nama = \"{$data["nama"]}\", harga = {$data["harga"]}
+                where id=" . $id;
+        $this->perform($sql);
+        return true;
+    }
+
+    public function deleteMenuWithId($id)
+    {
+        $sql = "DELETE 
+                    FROM menu
+                    WHERE id=" . $id;
+        $this->perform($sql);
+        return true;
+    }
+
+    public function createMenu($data)
+    {
+        $sql = "INSERT INTO menu
+                (nama, harga)
+                VALUES
+                (\"{$data["nama"]}\", {$data["harga"]})
+                ";
+        // echo $sql;
+        // die();
+        $this->perform($sql);
+    }
+
+    public function getOneMenu($id){
+
+        $sql = "SELECT * FROM menu where  id=". $id;
+        $result = $this->perform($sql);
+        
+        $row = $result->fetch_assoc();
+        
+        return $row;
+    }
+}
