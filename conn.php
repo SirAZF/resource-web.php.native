@@ -81,11 +81,13 @@ class KaryawanConn extends Connection
 class RoleConn extends Connection
 {
 
-    public function getRole()
+    public function getRoleWithGaji()
     {
         $sql = "SELECT
-
-                * FROM bagian";
+                b.id as 'id', b.nama as 'nama', g.pokok as 'gaji'
+                FROM bagian b
+                JOIN gaji g ON b.id = g.role
+                ORDER BY b.id";
         return $this->perform($sql);
     }
 
@@ -93,7 +95,12 @@ class RoleConn extends Connection
     {
         $sql = "UPDATE bagian
                 SET nama = \"{$data["nama"]}\"
+                UPDATE gaji
+                SET pokok = {$data["gaji"]}
+                FROM bagian JOIN gaji
+                ON bagian.id = gaji.role
                 where id=" . $id;
+                
         $this->perform($sql);
         return true;
     }
@@ -112,7 +119,11 @@ class RoleConn extends Connection
         $sql = "INSERT INTO bagian
                 (nama)
                 VALUES
-                (\"{$data["nama"]}\")
+                (\"{$data["nama"]}\");
+                INSERT INTO gaji
+                (pokok)
+                VALUES
+                ({$data["gaji"]});
                 ";
         // echo $sql;
         // die();
