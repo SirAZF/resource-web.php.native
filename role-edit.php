@@ -1,6 +1,6 @@
 <?php
 
-include("conn.php");
+include("role-conn.php");
 
 
 $conn = new RoleConn();
@@ -8,6 +8,7 @@ $conn = new RoleConn();
 $id = $_GET["id"];
 
 $row = $conn->getOne($id);
+
 
 if (isset($_GET["id"])) {
 
@@ -40,6 +41,6 @@ if (isset($_GET["id"])) {
 <form action="" method="post" style="display: flex; flex-direction: column; padding: 16px; gap: 8px; width: fit-content">
     <h1>Edit Bagian</h1>
     <input type="text" name="nama" placeholder="Nama Bagian" value="<?= $row["nama"] ?>" required>
-    <input type="text" name="gaji" placeholder="Gaji" value="<?= $row["gaji"] ?>" required>
+    <input type="text" name="gaji" placeholder="Gaji" value="<?= $row["pokok"] ?? 0 ?>" required>
     <button type="submit">Simpan Perubahan</button>
 </form>

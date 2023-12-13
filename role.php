@@ -1,13 +1,15 @@
 <?php
 
-include("conn.php");
+include("role-conn.php");
+
+include("head.php");
 
 $conn = new RoleConn();
 
 $result = $conn->getRoleWithGaji();
-
-include("head.php");
 ?>
+
+
 <a href="/role-tambah.php">Tambah Bagian</a>
 <table>
     <tr>
@@ -26,7 +28,7 @@ include("head.php");
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $row["nama"] ?></td>
-                <td><?= $row["gaji"] ?></td>
+                <td><?= $row["gaji"] ?? "-" ?></td>
                 <td>
                     <a href="/role-edit.php?id=<?= $row["id"] ?>"><button>Edit</button></a>
                     <a href="/role-hapus.php?id=<?= $row["id"] ?>">Delete</a>

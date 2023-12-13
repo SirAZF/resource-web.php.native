@@ -1,5 +1,5 @@
 <?php
-include("conn.php");
+include("role-conn.php");
 
 if (isset($_POST["nama"]) && isset($_POST["gaji"])) {
     $data = [

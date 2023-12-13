@@ -78,69 +78,6 @@ class KaryawanConn extends Connection
     }
 }
 
-class RoleConn extends Connection
-{
-
-    public function getRoleWithGaji()
-    {
-        $sql = "SELECT
-                b.id as 'id', b.nama as 'nama', g.pokok as 'gaji'
-                FROM bagian b
-                JOIN gaji g ON b.id = g.role
-                ORDER BY b.id";
-        return $this->perform($sql);
-    }
-
-    public function updateRolebyID($id, $data)
-    {
-        $sql = "UPDATE bagian
-                SET nama = \"{$data["nama"]}\"
-                UPDATE gaji
-                SET pokok = {$data["gaji"]}
-                FROM bagian JOIN gaji
-                ON bagian.id = gaji.role
-                where id=" . $id;
-                
-        $this->perform($sql);
-        return true;
-    }
-
-    public function deleteRoleWithId($id)
-    {
-        $sql = "DELETE 
-                    FROM bagian
-                    WHERE id=" . $id;
-        $this->perform($sql);
-        return true;
-    }
-
-    public function createRole($data)
-    {
-        $sql = "INSERT INTO bagian
-                (nama)
-                VALUES
-                (\"{$data["nama"]}\");
-                INSERT INTO gaji
-                (pokok)
-                VALUES
-                ({$data["gaji"]});
-                ";
-        // echo $sql;
-        // die();
-        $this->perform($sql);
-    }
-
-    public function getOne($id){
-
-        $sql = "SELECT nama FROM bagian where  id=". $id;
-        $result = $this->perform($sql);
-        
-        $row = $result->fetch_assoc();
-        
-        return $row;
-    }
-}
-
 
 class MenuConn extends Connection
 {
