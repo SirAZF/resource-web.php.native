@@ -23,20 +23,6 @@ function addtoCart($id)
     }
 }
 
-function plusCart($id)
-{
-    $index = array_search($id, array_column($_SESSION["cart"], 'id'));
-    $_SESSION["cart"][$index]["qty"]++;
-}
-
-function minusCart($id)
-{
-    $index = array_search($id, array_column($_SESSION["cart"], 'id'));
-    if ($_SESSION["cart"][$index]["qty"] > 0) {
-        $_SESSION["cart"][$index]["qty"]--;
-    }
-}
-
 if (isset($_GET["id"])) {
     addtoCart($_GET["id"]);
     header("Location: menu.php");

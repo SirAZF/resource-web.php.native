@@ -58,8 +58,8 @@ include("head.php")
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $row1["id"] ?></td>
-                <td><button>- </button><?= $row1["qty"] ?? "0" ?><button> +</button></td>
-                <td><a href=""><button>remove</button></a></td>
+                <td><a href="minus-qty.php?id=<?= $row1["id"] ?>"><button>-</button></a><?= $row1["qty"] ?? "0" ?><a href="tambah-qty.php?id=<?= $row1["id"] ?>"><button>+</button></a></td>
+                <td><a href="hapus-cart.php?id=<?= $row1["id"] ?>"><button>remove</button></a></td>
             </tr>
     <?php
             $no++;
