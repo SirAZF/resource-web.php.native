@@ -19,6 +19,12 @@ function removeLast(){
     }
 }
 
+function removeData($id){
+    if(food_is_on_session()){
+        unset($_SESSION["food"][$id]);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_POST['action'] == 'add'){
         addFood($_POST["food"]);
